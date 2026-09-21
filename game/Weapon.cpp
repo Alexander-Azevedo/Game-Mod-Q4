@@ -2655,6 +2655,17 @@ void rvWeapon::LaunchProjectiles ( idDict& dict, const idVec3& muzzleOrigin, con
 		dir += dirOffset;
 #endif
 //RAVEN END
+		if (num_projectiles == 3) {
+			if (i == 0) {
+				dir = playerViewAxis[0] + playerViewAxis[2] * 0.08f;
+			}
+			else if (i == 1) {
+				dir = playerViewAxis[0];
+			}
+			else if (i == 2) {
+				dir = playerViewAxis[0] - playerViewAxis[2] * 0.08f;
+			}
+		}
 		dir.Normalize();
 	
 		// If a projectile entity has already been created then use that one, otherwise

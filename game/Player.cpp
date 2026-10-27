@@ -4435,7 +4435,7 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 					}
 				}
 			} else {
-				powerUpOverlay = regenerationOverlay;
+				//powerUpOverlay = regenerationOverlay;
 
 				StopEffect( "fx_quaddamage" );
 				PlayEffect( "fx_regeneration", animator.GetJointHandle( "chest" ), true );
@@ -4450,9 +4450,9 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 		}
 
 		case POWERUP_HASTE: {
-			powerUpOverlay = hasteOverlay;
+			//powerUpOverlay = hasteOverlay;
 
-			hasteEffect = PlayEffect( "fx_haste", GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), true );
+			//hasteEffect = PlayEffect( "fx_haste", GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), true );
 			break;
 		}
 		

@@ -49,7 +49,6 @@ rvWeaponShotgun::Spawn
 */
 void rvWeaponShotgun::Spawn( void ) {
 	hitscans   = spawnArgs.GetFloat( "hitscans" );
-	
 	SetState( "Raise", 0 );	
 }
 
@@ -159,15 +158,28 @@ rvWeaponShotgun::State_Fire
 stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 	enum {
 		STAGE_INIT,
+		STAGE_SECOND,
 		STAGE_WAIT,
 	};	
 	switch ( parms.stage ) {
 		case STAGE_INIT:
-			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
+			gameLocal.Printf("DOOF FIRE CODE RUNNING\n");
+
+			nextAttackTime = gameLocal.time + 200;
 			Attack( false, hitscans, spread, 0, 1.0f );
 			PlayAnim( ANIMCHANNEL_ALL, "fire", 0 );	
-			return SRESULT_STAGE( STAGE_WAIT );
-	
+			return SRESULT_STAGE( STAGE_SECOND );
+
+		case STAGE_SECOND:
+			if (gameLocal.time >= nextAttackTime) {
+				Attack(false, hitscans, spread, 0, 1.0f);
+				nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier(PMOD_FIRERATE));
+				return SRESULT_STAGE(STAGE_WAIT);
+			}
+			else {
+				return SRESULT_WAIT;
+			}
+		
 		case STAGE_WAIT:
 			if ( (!gameLocal.isMultiplayer && (wsfl.lowerWeapon || AnimDone( ANIMCHANNEL_ALL, 0 )) ) || AnimDone( ANIMCHANNEL_ALL, 0 ) ) {
 				SetState( "Idle", 0 );

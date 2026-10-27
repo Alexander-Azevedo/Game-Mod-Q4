@@ -26,7 +26,7 @@
 // RAVEN END
 
 #ifdef _WIN32
-#include "TypeInfo.h"
+#include "TypeInfo"
 #else
 #include "NoGameTypeInfo.h"
 #endif
@@ -171,7 +171,7 @@ void Cmd_ListSpawnArgs_f( const idCmdArgs &args ) {
 
 	for ( i = 0; i < ent->spawnArgs.GetNumKeyVals(); i++ ) {
 		const idKeyValue *kv = ent->spawnArgs.GetKeyVal( i );
-		gameLocal.Printf( "\"%s\"  "S_COLOR_WHITE"\"%s\"\n", kv->GetKey().c_str(), kv->GetValue().c_str() );
+		gameLocal.Printf( "\"%s\"   " S_COLOR_WHITE "\"%s\"\n", kv->GetKey().c_str(), kv->GetValue().c_str() );
 	}
 }
 
@@ -488,17 +488,17 @@ void GiveStuffToPlayer( idPlayer* player, const char* name, const char* value )
 	}
 
 	if ( idStr::Icmp( name, "regen" ) == 0 ) {
-		player->GivePowerUp( POWERUP_REGENERATION, SEC2MS( 30.0f ) );
+		player->GivePowerUp( POWERUP_REGENERATION, SEC2MS( 60.0f ) );
 		return;
 	}
 
 	if ( idStr::Icmp( name, "haste" ) == 0 ) {
-		player->GivePowerUp( POWERUP_HASTE, SEC2MS( 30.0f ) );
+		player->GivePowerUp( POWERUP_HASTE, SEC2MS( 60.0f ) );
 		return;
 	}
 
 	if (idStr::Icmp(name, "ammoregen") == 0) {
-		player->GivePowerUp( POWERUP_AMMOREGEN, -1 );
+		player->GivePowerUp( POWERUP_AMMOREGEN, SEC2MS( 60.0f ) );
 		return;
 	}
 	
@@ -508,12 +508,12 @@ void GiveStuffToPlayer( idPlayer* player, const char* name, const char* value )
 	}
 
 	if (idStr::Icmp(name, "doubler") == 0) {
-		player->GivePowerUp( POWERUP_DOUBLER, -1 );
+		player->GivePowerUp( POWERUP_DOUBLER, SEC2MS( 60.0f ) );
 		return;
 	}
 
 	if (idStr::Icmp(name, "guard") == 0) {
-		player->GivePowerUp( POWERUP_GUARD, -1 );
+		player->GivePowerUp( POWERUP_GUARD, SEC2MS( 60.0f ) );
 		return;
 	}
 // RAVEN END

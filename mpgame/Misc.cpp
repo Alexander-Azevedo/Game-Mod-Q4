@@ -4381,3 +4381,14 @@ void rvFuncSaveGame::Event_Activate( idEntity *activator ) {
 	// TODO: Xenon - request the player to save the game.
 	cmdSystem->BufferCommandText( CMD_EXEC_APPEND, "saveGame checkPoint" );
 }
+
+CLASS_DECLARATION(idStaticEntity, mysteryBox)
+EVENT(EV_Activate, mysteryBox::UseBox)
+END_CLASS
+
+void mysteryBox::Spawn(void) {
+	fl.usable = true;
+}
+
+void mysteryBox::UseBox(idEntity* activator) {
+}

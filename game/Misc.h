@@ -970,5 +970,14 @@ public:
 private:
 };
 
+class mysteryBox : public idStaticEntity {
+public:
+	CLASS_PROTOTYPE(mysteryBox);
+
+	void Spawn(void);
+
+private:
+	void UseBox(idEntity* activator);
+};
 
 #endif /* !__GAME_MISC_H__ */
